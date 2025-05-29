@@ -5,38 +5,28 @@ import html from '../../database/books/html.json';
 import css from '../../database/books/css.json';
 import js from '../../database/books/javascript.json';
 import react from '../../database/books/reactjs.json';
-import tailwind from '../../database/books/tailwindcss.json'; //SORRY
+import tailwind from '../../database/books/tailwindcss.json';
 import nextjs from '../../database/books/nextjs.json';
 import { useLocation } from "react-router-dom";
-
 
 const Index = () => {
   const [filter, setFilter] = useState('html');
   const [data, setData] = useState([]);
-  const [searchData, setSearchData] = useState();
+  const [searchData, setSearchData] = useState([]);
   let location = useLocation();
 
-
   useEffect(() => {
-    console.log('Current filter:', filter);
     if (filter === 'html') {
-      console.log('Loading HTML data:', html);
       setData([...html]);
     } else if (filter === 'css') {
-      console.log('Loading CSS data:', css);
       setData([...css]);
     } else if (filter === 'js') {
-      console.log('Loading JS data:', js);
       setData([...js]);
-    } else if (filter === 'tailwind') {        //SORRY
-      console.log('Loading Tailwind data:', tailwind);
+    } else if (filter === 'tailwind') {
       setData([...tailwind]);
-    }else if (filter === 'nextjs') {
-      console.log('Loading NextJS data:', nextjs);
+    } else if (filter === 'nextjs') {
       setData([...nextjs]);
-    } 
-     else {
-      console.log('Loading React data:', react);
+    } else {
       setData([...react]);
     }
   }, [filter]);
@@ -45,34 +35,60 @@ const Index = () => {
     setFilter(target);
   };
 
-  const index = location.search.indexOf("=");
-
-  let searchItem = location.search.slice(index + 1);
+  // Get search query from URL
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get('search') || '';
 
   useEffect(() => {
-    const value = data.filter((item) => {
-      return `${item.title.toLowerCase()}`.includes(searchItem.toLowerCase());
+    if (!searchQuery.trim()) {
+      setSearchData([]);
+      return;
+    }
+
+    const searchTerm = searchQuery.toLowerCase().trim();
+    const filteredResults = data.filter((item) => {
+      const titleMatch = item.title.toLowerCase().includes(searchTerm);
+      const descriptionMatch = item.description.toLowerCase().includes(searchTerm);
+      return titleMatch || descriptionMatch;
     });
-    setSearchData(value);
-  }, [searchItem, data]);
+    
+    setSearchData(filteredResults);
+  }, [searchQuery, data]);
 
   return (
     <div className='m-8 mt-32 lg:mt-8'>
       <Filter onStateChange={handleFilterChange} />
       <div className='flex flex-wrap gap-5'>
-        {data.length > 0 ? (
-        (location.search !== "" ? searchData : data).map((res, i) => (
-            <Card
-              key={res.title}
-              title={res.title}
-              link={res.link}
-              description={res.description}
-              i={i}
-              img={res.img}
-            />
-          ))
+        {searchQuery ? (
+          searchData.length > 0 ? (
+            searchData.map((res, i) => (
+              <Card
+                key={res.title}
+                title={res.title}
+                link={res.link}
+                description={res.description}
+                i={i}
+                img={res.img}
+              />
+            ))
+          ) : (
+            <p className="text-gray-600 dark:text-gray-400">No results found for "{searchQuery}"</p>
+          )
         ) : (
-          <p>No Data Found.</p>
+          data.length > 0 ? (
+            data.map((res, i) => (
+              <Card
+                key={res.title}
+                title={res.title}
+                link={res.link}
+                description={res.description}
+                i={i}
+                img={res.img}
+              />
+            ))
+          ) : (
+            <p className="text-gray-600 dark:text-gray-400">No books available in this category.</p>
+          )
         )}
       </div>
     </div>
