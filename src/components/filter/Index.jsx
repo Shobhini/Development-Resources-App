@@ -8,52 +8,49 @@ const index = ({ onStateChange }) => {
     onStateChange(target);
   };
 
+  const filterButtonClass = (isActive) => `
+    px-3 py-1 rounded-xl cursor-pointer text-xs lg:text-base
+    transition-all duration-200 ease-in-out
+    ${isActive 
+      ? 'bg-[#545454] text-white border-2 border-[#807f7f] shadow-md transform scale-105' 
+      : 'bg-[#ddd] hover:bg-[#c4c4c4] text-gray-700'
+    }
+  `;
+
   return (
-    <div className="flex md:space-x-6 space-x-2 items-center mb-10">
+    <div className="flex md:space-x-6 space-x-2 items-center mb-10 flex-wrap">
       <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd] text-xs lg:text-base ${
-          filter === "html" ? "border" : ""
-        }`}
+        className={filterButtonClass(filter === "html")}
         onClick={() => handleFilterChange("html")}
       >
         HTML
       </p>
       <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd] text-xs lg:text-base ${
-          filter === "css" ? "border" : ""
-        }`}
+        className={filterButtonClass(filter === "css")}
         onClick={() => handleFilterChange("css")}
       >
         CSS
       </p>
       <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd] text-xs lg:text-base ${
-          filter === "js" ? "border" : ""
-        }`}
+        className={filterButtonClass(filter === "js")}
         onClick={() => handleFilterChange("js")}
       >
         Javascript
       </p>
       <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd] text-xs lg:text-base ${
-          filter === "tailwind" ? "border" : ""
-        }`}
+        className={filterButtonClass(filter === "tailwind")}
         onClick={() => handleFilterChange("tailwind")}
       >
         Tailwind CSS
       </p>
-         <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd]  ${
-          filter === "nextjs" ? "border" : ""
-        }`}
+      <p
+        className={filterButtonClass(filter === "nextjs")}
         onClick={() => handleFilterChange("nextjs")}
       >
         NextJS
       </p>
       <p
-        className={`px-3 py-1 rounded-xl cursor-pointer bg-[#ddd] text-xs lg:text-base ${
-          filter === "react" ? "border" : ""
-        }`}
+        className={filterButtonClass(filter === "react")}
         onClick={() => handleFilterChange("react")}
       >
         ReactJS
