@@ -1,34 +1,38 @@
 import { useEffect, useState } from 'react';
 import Card from '../Card';
 import Filter from '../filter/Index';
-import html from '../../database/books/html.json';
-import css from '../../database/books/css.json';
-import js from '../../database/books/javascript.json';
-import react from '../../database/books/reactjs.json';
-import tailwind from '../../database/books/tailwindcss.json';
-import nextjs from '../../database/books/nextjs.json';
 import { useLocation } from "react-router-dom";
+
+const API_URL = 'http://localhost:5000/api';
 
 const Index = () => {
   const [filter, setFilter] = useState('html');
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   let location = useLocation();
 
   useEffect(() => {
-    if (filter === 'html') {
-      setData([...html]);
-    } else if (filter === 'css') {
-      setData([...css]);
-    } else if (filter === 'js') {
-      setData([...js]);
-    } else if (filter === 'tailwind') {
-      setData([...tailwind]);
-    } else if (filter === 'nextjs') {
-      setData([...nextjs]);
-    } else {
-      setData([...react]);
-    }
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_URL}/books/${filter}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const result = await response.json();
+        setData(result);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        console.error('Error fetching data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [filter]);
 
   const handleFilterChange = (target) => {
@@ -40,20 +44,51 @@ const Index = () => {
   const searchQuery = searchParams.get('search') || '';
 
   useEffect(() => {
-    if (!searchQuery.trim()) {
-      setSearchData([]);
-      return;
-    }
+    const searchBooks = async () => {
+      if (!searchQuery.trim()) {
+        setSearchData([]);
+        return;
+      }
 
-    const searchTerm = searchQuery.toLowerCase().trim();
-    const filteredResults = data.filter((item) => {
-      const titleMatch = item.title.toLowerCase().includes(searchTerm);
-      const descriptionMatch = item.description.toLowerCase().includes(searchTerm);
-      return titleMatch || descriptionMatch;
-    });
-    
-    setSearchData(filteredResults);
-  }, [searchQuery, data]);
+      try {
+        const response = await fetch(`${API_URL}/books/search/${searchQuery}`);
+        if (!response.ok) {
+          throw new Error('Search failed');
+        }
+        const results = await response.json();
+        // Flatten results from all categories
+        const allResults = Object.values(results).flat();
+        setSearchData(allResults);
+      } catch (err) {
+        console.error('Search error:', err);
+        setSearchData([]);
+      }
+    };
+
+    searchBooks();
+  }, [searchQuery]);
+
+  if (loading) {
+    return (
+      <div className="m-8 mt-32 lg:mt-8">
+        <Filter onStateChange={handleFilterChange} />
+        <div className="flex justify-center items-center h-64">
+          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="m-8 mt-32 lg:mt-8">
+        <Filter onStateChange={handleFilterChange} />
+        <div className="flex justify-center items-center h-64">
+          <p className="text-red-500">Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='m-8 mt-32 lg:mt-8'>
