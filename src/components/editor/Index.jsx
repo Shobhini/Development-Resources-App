@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Card from '../Card';
-import Filter from '../filter/index';
+import Filter from '../filter/Index';
 import html from '../../database/editor/html.json';
 import css from '../../database/editor/css.json';
 import js from '../../database/editor/javascript.json';
@@ -9,13 +9,15 @@ import react from '../../database/editor/reactjs.json';
 const Index = () => {
   const [filter, setFilter] = useState('html');
   const [data, setData] = useState([]);
+  const [searchData, setSearchData] = useState();
+  let location = useLocation();
 
   useEffect(() => {
     if (filter === 'html') {
       setData([...html]);
     } else if (filter === 'css') {
       setData([...css]);
-    } else if (filter === 'js') {
+    } else if (filter === 'javascript') {
       setData([...js]);
     } else {
       setData([...react]);

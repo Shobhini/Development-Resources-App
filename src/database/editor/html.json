@@ -1,6 +1,13 @@
 [{
+    "tag": "html",
+    "title": "CodePen",
+    "description": "You write code in the editors, the results of that code are shown to you in the preview area. It's simple, but powerful!",
+    "link": "https://codepen.io/pen/"
 
 },
 {
-  
+    "tag": "html",
+    "title": "JSFiddle",
+    "description": "JSFiddle is a code editor that allows you to write and test HTML, CSS, and JavaScript code. It's a great tool for testing out code snippets and prototypes.",
+    "link": "https://jsfiddle.net/"
 }]
