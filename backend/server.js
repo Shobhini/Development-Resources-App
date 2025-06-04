@@ -41,7 +41,7 @@ const books = {
       "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
     }
   ],
-  js: [
+  javascript: [
     {
       "tag": "js",
       "title": "Eloquent Javascript",
@@ -57,25 +57,25 @@ const books = {
       "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
     },
     {
-    "tag": "js",
-    "title": "Node Bots",
-    "description": "This book is for anyone who wants to take the first steps on Nodebots or has an interest in deliving into some concepts that are poorly demonstrated on the subject.",
-    "link": "https://drive.google.com/file/d/1NU8xbM2d-p3ihxPga1wtH114ieDdme1-/view",
-    "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+      "tag": "js",
+      "title": "Node Bots",
+      "description": "This book is for anyone who wants to take the first steps on Nodebots or has an interest in deliving into some concepts that are poorly demonstrated on the subject.",
+      "link": "https://drive.google.com/file/d/1NU8xbM2d-p3ihxPga1wtH114ieDdme1-/view",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
     },
     {
-    "tag": "js",
-    "title": "Javascript the Good Parts",
-    "description": "This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts'). It's about making sure you know the really important parts of the language and create good habits instead of having to break bad ones down the line.",
-    "link": "https://github.com/dwyl/Javascript-the-Good-Parts-notes",
-    "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+      "tag": "js",
+      "title": "Javascript the Good Parts",
+      "description": "This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts'). It's about making sure you know the really important parts of the language and create good habits instead of having to break bad ones down the line.",
+      "link": "https://github.com/dwyl/Javascript-the-Good-Parts-notes",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
     },
     {
-    "tag": "js",
-    "title": "Javascript - The Right Way",
-    "description": "This is a guide intended to introduce new developers to JavaScript and help experienced developers learn more about its best practices.Despite the name, this guide doesn't necessarily mean the only way to do JavaScript.We just gather all the articles, tips, and tricks from top developers and put it here. Since it comes from exceptional folks, we could say that it is the right way, or the best way to do so.",
-    "link": "https://jstherightway.org/",
-    "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+      "tag": "js",
+      "title": "Javascript - The Right Way",
+      "description": "This is a guide intended to introduce new developers to JavaScript and help experienced developers learn more about its best practices.Despite the name, this guide doesn't necessarily mean the only way to do JavaScript.We just gather all the articles, tips, and tricks from top developers and put it here. Since it comes from exceptional folks, we could say that it is the right way, or the best way to do so.",
+      "link": "https://jstherightway.org/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
     }
   ],
   tailwind: [
@@ -135,6 +135,100 @@ const books = {
   ]
 };
 
+const editors = {
+  html: [
+    {
+      "tag": "html",
+      "title": "Visual Studio Code",
+      "description": "A lightweight but powerful source code editor which runs on your desktop. It comes with built-in support for JavaScript, TypeScript and Node.js.",
+      "link": "https://code.visualstudio.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    },
+    {
+      "tag": "html",
+      "title": "Sublime Text",
+      "description": "A sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.",
+      "link": "https://www.sublimetext.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    }
+  ],
+  css: [
+    {
+      "tag": "css",
+      "title": "Visual Studio Code",
+      "description": "A lightweight but powerful source code editor which runs on your desktop. It comes with built-in support for JavaScript, TypeScript and Node.js.",
+      "link": "https://code.visualstudio.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    },
+    {
+      "tag": "css",
+      "title": "WebStorm",
+      "description": "A powerful IDE for modern JavaScript development with built-in support for HTML, CSS, and JavaScript.",
+      "link": "https://www.jetbrains.com/webstorm/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    }
+  ],
+  javascript: [
+    {
+      "tag": "js",
+      "title": "Visual Studio Code",
+      "description": "A lightweight but powerful source code editor which runs on your desktop. It comes with built-in support for JavaScript, TypeScript and Node.js.",
+      "link": "https://code.visualstudio.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    },
+    {
+      "tag": "js",
+      "title": "WebStorm",
+      "description": "A powerful IDE for modern JavaScript development with built-in support for HTML, CSS, and JavaScript.",
+      "link": "https://www.jetbrains.com/webstorm/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    }
+  ],
+  tailwind: [
+    {
+      "tag": "tailwind",
+      "title": "Visual Studio Code",
+      "description": "A lightweight but powerful source code editor which runs on your desktop. It comes with built-in support for JavaScript, TypeScript and Node.js.",
+      "link": "https://code.visualstudio.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    },
+    {
+      "tag": "tailwind",
+      "title": "WebStorm",
+      "description": "A powerful IDE for modern JavaScript development with built-in support for HTML, CSS, and JavaScript.",
+      "link": "https://www.jetbrains.com/webstorm/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    }
+
+
+  ],
+  nextjs: [
+      {
+        "tag": "nextjs",
+        "title": "NextJS",
+        "description": "Next.js is an open-source web development framework created by the private company Vercel providing React-based web applications with server-side rendering and static website generation.",
+        "link": "#",
+        "img": "#"
+      }
+  ],
+  react: [
+    {
+      "tag": "react",
+      "title": "Visual Studio Code",
+      "description": "A lightweight but powerful source code editor which runs on your desktop. It comes with built-in support for JavaScript, TypeScript and Node.js.",
+      "link": "https://code.visualstudio.com/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    },
+    {
+      "tag": "react",
+      "title": "WebStorm",
+      "description": "A powerful IDE for modern JavaScript development with built-in support for HTML, CSS, and JavaScript.",
+      "link": "https://www.jetbrains.com/webstorm/",
+      "img": "https://user-images.githubusercontent.com/100681165/238345276-e3dde5b5-f7d2-46ea-a485-26a43df1f8c4.jpg"
+    }
+  ]
+};
+
 // API Routes
 // Get all books
 app.get('/api/books', (req, res) => {
@@ -181,6 +275,59 @@ app.get('/api/books/search/:query', (req, res) => {
     const matches = books[category].filter(book => 
       book.title.toLowerCase().includes(query) || 
       book.description.toLowerCase().includes(query)
+    );
+    if (matches.length > 0) {
+      results[category] = matches;
+    }
+  });
+  
+  res.json(results);
+});
+
+// Editor API Routes
+// Get all editors
+app.get('/api/editor', (req, res) => {
+  res.json(editors);
+});
+
+// Get editors by category
+app.get('/api/editor/:category', (req, res) => {
+  const category = req.params.category;
+  if (editors[category]) {
+    res.json(editors[category]);
+  } else {
+    res.status(404).json({ message: 'Category not found' });
+  }
+});
+
+// Add a new editor
+app.post('/api/editor/:category', (req, res) => {
+  const category = req.params.category;
+  const newEditors = req.body;
+  
+  if (!editors[category]) {
+    editors[category] = [];
+  }
+  
+  if (Array.isArray(newEditors)) {
+    editors[category].push(...newEditors);
+    res.status(201).json(newEditors);
+    return;
+  } else {
+    editors[category].push(newEditors);
+    res.status(201).json(newEditors);
+  }
+});
+
+// Search editors
+app.get('/api/editor/search/:query', (req, res) => {
+  const query = req.params.query.toLowerCase();
+  const results = {};
+  
+  Object.keys(editors).forEach(category => {
+    const matches = editors[category].filter(editor => 
+      editor.title.toLowerCase().includes(query) || 
+      editor.description.toLowerCase().includes(query)
     );
     if (matches.length > 0) {
       results[category] = matches;
