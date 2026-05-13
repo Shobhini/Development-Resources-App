@@ -1,64 +1,54 @@
-import React,{lazy, Suspense} from "react";
-import { Route, Routes, NavLink } from "react-router-dom";
-// import Nav from './components/nav/Nav.jsx';
-import SideNav from "./components/nav/SideNav.jsx";
-import ScrollToTopButton from "./components/ScrollToTopButton.jsx";
+import React, { lazy, Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import SideNav from './components/nav/SideNav.jsx'
+import ScrollToTopButton from './components/ScrollToTopButton.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import AdminRoute from './components/AdminRoute.jsx'
 
-const Home = lazy(() => import("./components/Home.jsx"));
-const Books = lazy(() => import("./components/books/Index.jsx"));
-const Tools = lazy(() => import("./components/tools/Index.jsx"));
-const Videos = lazy(() => import("./components/videos/Index.jsx"));
-const Editors = lazy(() => import("./components/editor/Index.jsx"));
-const Websites = lazy(() => import("./components/websites/Index.jsx"));
-const Challenges = lazy(() => import("./components/challenges/Index.jsx"));
+const Home = lazy(() => import('./components/Home.jsx'))
+const Books = lazy(() => import('./components/books/Index.jsx'))
+const Tools = lazy(() => import('./components/tools/Index.jsx'))
+const Videos = lazy(() => import('./components/videos/Index.jsx'))
+const Editors = lazy(() => import('./components/editor/Index.jsx'))
+const Websites = lazy(() => import('./components/websites/Index.jsx'))
+const Challenges = lazy(() => import('./components/challenges/Index.jsx'))
+const Login = lazy(() => import('./pages/Login.jsx'))
+const Register = lazy(() => import('./pages/Register.jsx'))
+const Bookmarks = lazy(() => import('./pages/Bookmarks.jsx'))
+const SubmitResource = lazy(() => import('./pages/SubmitResource.jsx'))
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard.jsx'))
 
-const App = () => {
-  return (
-    <div className="flex">
-      <SideNav className="" />
-      <div className="lg:pl-60">
-        <Routes location={location} key={location.key}>
-          {/* Home */}
-          <Route path="/" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Home />
-            </Suspense>
-          } />
-          <Route path="/Videos" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Videos />
-            </Suspense>
-          } />
-          <Route path="/Websites" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Websites />
-            </Suspense>
-          } />
-          <Route path="/Challenges" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Challenges />
-            </Suspense>
-          } />
-          <Route path="/Books" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Books />
-            </Suspense>
-          } />
-          <Route path="/Tools" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Tools />
-            </Suspense>
-          } />
-            <Route path="/Editors" element={
-            <Suspense fallback={<p>Loading</p>}>
-              <Editors />
-            </Suspense>
-          } />
-        </Routes>
-      </div>
-      <ScrollToTopButton />
+const Wrap = ({ children }) => (
+  <Suspense fallback={<p className="p-8 text-gray-500">Loading...</p>}>{children}</Suspense>
+)
+
+const App = () => (
+  <div className="flex">
+    <SideNav />
+    <div className="lg:pl-60 w-full">
+      <Routes>
+        <Route path="/" element={<Wrap><Home /></Wrap>} />
+        <Route path="/Videos" element={<Wrap><Videos /></Wrap>} />
+        <Route path="/Websites" element={<Wrap><Websites /></Wrap>} />
+        <Route path="/Challenges" element={<Wrap><Challenges /></Wrap>} />
+        <Route path="/Books" element={<Wrap><Books /></Wrap>} />
+        <Route path="/Tools" element={<Wrap><Tools /></Wrap>} />
+        <Route path="/Editors" element={<Wrap><Editors /></Wrap>} />
+        <Route path="/login" element={<Wrap><Login /></Wrap>} />
+        <Route path="/register" element={<Wrap><Register /></Wrap>} />
+        <Route path="/bookmarks" element={
+          <ProtectedRoute><Wrap><Bookmarks /></Wrap></ProtectedRoute>
+        } />
+        <Route path="/submit" element={
+          <ProtectedRoute><Wrap><SubmitResource /></Wrap></ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <AdminRoute><Wrap><AdminDashboard /></Wrap></AdminRoute>
+        } />
+      </Routes>
     </div>
-  );
-};
+    <ScrollToTopButton />
+  </div>
+)
 
-export default App;
+export default App
