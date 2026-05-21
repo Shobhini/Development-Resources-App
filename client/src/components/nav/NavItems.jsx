@@ -22,7 +22,8 @@ const icons = [
   { icon: <GiIcons.GiBookshelf />, iconName: "Books", navlink: "Books" },
   { icon: <BsIcons.BsTools />, iconName: "Tools", navlink: "Tools" },
   { icon: <BiIcons.BiBullseye />, iconName: "Challenges", navlink: "challenges" },
-  { icon: <RiIcons.RiCodeSSlashLine />, iconName: "Editors", navlink: "editor" }, // Using RiIcons here
+  { icon: <RiIcons.RiCodeSSlashLine />, iconName: "Editors", navlink: "editor" },
+  { icon: <RiIcons.RiRoadMapLine />, iconName: "Learning Path", navlink: "learning-path" },
 ];
 
 function NavItem({searchResult}) {

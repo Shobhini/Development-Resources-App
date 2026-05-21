@@ -1,133 +1,37 @@
-import { useEffect, useState } from 'react';
-import Card from '../Card';
-import Filter from '../filter/Index';
-import { useLocation } from "react-router-dom";
-
-const API_URL = 'http://localhost:5000/api';
+import Card from '../Card'
+import Filter from '../filter/Index'
+import CardSkeleton from '../CardSkeleton'
+import useResources from '../../hooks/useResources'
 
 const Index = () => {
-  const [filter, setFilter] = useState('html');
-  const [data, setData] = useState([]);
-  const [searchData, setSearchData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  let location = useLocation();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`${API_URL}/books/${filter}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const result = await response.json();
-        setData(result);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [filter]);
-
-  const handleFilterChange = (target) => {
-    setFilter(target);
-  };
-
-  // Get search query from URL
-  const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search') || '';
-
-  useEffect(() => {
-    const searchBooks = async () => {
-      if (!searchQuery.trim()) {
-        setSearchData([]);
-        return;
-      }
-
-      try {
-        const response = await fetch(`${API_URL}/books/search/${searchQuery}`);
-        if (!response.ok) {
-          throw new Error('Search failed');
-        }
-        const results = await response.json();
-        // Flatten results from all categories
-        const allResults = Object.values(results).flat();
-        setSearchData(allResults);
-      } catch (err) {
-        console.error('Search error:', err);
-        setSearchData([]);
-      }
-    };
-
-    searchBooks();
-  }, [searchQuery]);
-
-  if (loading) {
-    return (
-      <div className="m-8 mt-32 lg:mt-8">
-        <Filter onStateChange={handleFilterChange} />
-        <div className="flex justify-center items-center h-64">
-          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="m-8 mt-32 lg:mt-8">
-        <Filter onStateChange={handleFilterChange} />
-        <div className="flex justify-center items-center h-64">
-          <p className="text-red-500">Error: {error}</p>
-        </div>
-      </div>
-    );
-  }
+  const { data, loading, error, page, pages, setPage, handleFilterChange } = useResources('books')
 
   return (
-    <div className='m-8 mt-32 lg:mt-8'>
+    <div className="m-8 mt-32 lg:mt-8">
       <Filter onStateChange={handleFilterChange} />
-      <div className='flex flex-wrap gap-5'>
-        {searchQuery ? (
-          searchData.length > 0 ? (
-            searchData.map((res, i) => (
-              <Card
-                key={res.title}
-                title={res.title}
-                link={res.link}
-                description={res.description}
-                i={i}
-                img={res.img}
-              />
-            ))
-          ) : (
-            <p className="text-gray-600 dark:text-gray-400">No results found for "{searchQuery}"</p>
-          )
-        ) : (
-          data.length > 0 ? (
-            data.map((res, i) => (
-              <Card
-                key={res.title}
-                title={res.title}
-                link={res.link}
-                description={res.description}
-                i={i}
-                img={res.img}
-              />
-            ))
-          ) : (
-            <p className="text-gray-600 dark:text-gray-400">No books available in this category.</p>
-          )
-        )}
+      {error && <p className="text-red-500">Error: {error}</p>}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {loading
+          ? Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)
+          : data.length > 0
+            ? data.map((res, i) => (
+                <Card key={res._id} _id={res._id} title={res.title} link={res.link}
+                  description={res.description} i={i} img={res.img} />
+              ))
+            : <p className="text-gray-500 dark:text-gray-400 col-span-full">No resources found.</p>
+        }
       </div>
+      {!loading && pages > 1 && (
+        <div className="flex gap-3 mt-8 items-center">
+          <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+            className="px-4 py-2 bg-[#545454] text-white rounded-lg disabled:opacity-40">Prev</button>
+          <span className="text-gray-600 dark:text-gray-300">Page {page} of {pages}</span>
+          <button onClick={() => setPage(p => Math.min(pages, p + 1))} disabled={page === pages}
+            className="px-4 py-2 bg-[#545454] text-white rounded-lg disabled:opacity-40">Next</button>
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

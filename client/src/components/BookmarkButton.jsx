@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { useAuth } from '../context/AuthContext'
 
-const API = import.meta.env.VITE_API_URL
+import API from '../lib/api'
 
 const BookmarkButton = ({ resourceId, initialBookmarked = false }) => {
   const { user, token } = useAuth()

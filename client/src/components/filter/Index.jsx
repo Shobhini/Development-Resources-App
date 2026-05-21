@@ -18,7 +18,7 @@ const index = ({ onStateChange }) => {
   `;
 
   return (
-    <div className="flex md:space-x-6 space-x-2 items-center mb-10 flex-wrap">
+    <div className="flex space-x-2 md:space-x-4 items-center mb-10 overflow-x-auto pb-1 flex-nowrap scrollbar-none">
       <p
         className={filterButtonClass(filter === "html")}
         onClick={() => handleFilterChange("html")}

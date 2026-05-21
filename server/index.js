@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.js'
 import resourceRoutes from './routes/resources.js'
 import bookmarkRoutes from './routes/bookmarks.js'
 import submissionRoutes from './routes/submissions.js'
+import learningPathRoutes from './routes/learningPath.js'
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/resources', resourceRoutes)
 app.use('/api/bookmarks', bookmarkRoutes)
 app.use('/api/submissions', submissionRoutes)
+app.use('/api/learning-path', learningPathRoutes)
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }))
 

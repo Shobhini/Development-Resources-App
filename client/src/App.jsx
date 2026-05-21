@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import SideNav from './components/nav/SideNav.jsx'
+import Topbar from './components/nav/Topbar.jsx'
 import ScrollToTopButton from './components/ScrollToTopButton.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
@@ -17,6 +18,7 @@ const Register = lazy(() => import('./pages/Register.jsx'))
 const Bookmarks = lazy(() => import('./pages/Bookmarks.jsx'))
 const SubmitResource = lazy(() => import('./pages/SubmitResource.jsx'))
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard.jsx'))
+const LearningPath = lazy(() => import('./pages/LearningPath.jsx'))
 
 const Wrap = ({ children }) => (
   <Suspense fallback={<p className="p-8 text-gray-500">Loading...</p>}>{children}</Suspense>
@@ -25,7 +27,8 @@ const Wrap = ({ children }) => (
 const App = () => (
   <div className="flex">
     <SideNav />
-    <div className="lg:pl-60 w-full">
+    <Topbar />
+    <div className="lg:pl-60 w-full pt-14">
       <Routes>
         <Route path="/" element={<Wrap><Home /></Wrap>} />
         <Route path="/Videos" element={<Wrap><Videos /></Wrap>} />
@@ -34,6 +37,7 @@ const App = () => (
         <Route path="/Books" element={<Wrap><Books /></Wrap>} />
         <Route path="/Tools" element={<Wrap><Tools /></Wrap>} />
         <Route path="/Editors" element={<Wrap><Editors /></Wrap>} />
+        <Route path="/learning-path" element={<Wrap><LearningPath /></Wrap>} />
         <Route path="/login" element={<Wrap><Login /></Wrap>} />
         <Route path="/register" element={<Wrap><Register /></Wrap>} />
         <Route path="/bookmarks" element={

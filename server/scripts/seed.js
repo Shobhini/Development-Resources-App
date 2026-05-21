@@ -36,6 +36,7 @@ async function seed() {
       try {
         const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
         for (const item of raw) {
+          if (!item.title || !item.description || !item.link || !item.img) continue
           docs.push({
             title: item.title,
             description: item.description,

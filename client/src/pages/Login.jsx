@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-const API = import.meta.env.VITE_API_URL
+import API from '../lib/api'
 
 const Login = () => {
   const { login } = useAuth()
